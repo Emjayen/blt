@@ -12,7 +12,6 @@
 HDC hdcBackBuffer;
 HBITMAP hbmBackBuffer;
 DWORD* pPixels;
-LONG BackBufferPitch;
 LONG BackBufferWidth;
 LONG BackBufferHeight;
 
@@ -35,7 +34,6 @@ void ResizeBackBuffer(LONG cx, WORD cy)
 
     BackBufferWidth = cx;
     BackBufferHeight = cy;
-    BackBufferPitch = (BackBufferWidth+3) & ~3;
 }
 
 
@@ -55,7 +53,7 @@ void Render(HWND hwnd)
         pt.y = 0;
     }
 
-    pPixels[pt.y*BackBufferPitch+pt.x] = RGB(0, 0xFF, 0);
+    pPixels[pt.y*+pt.x] = RGB(0, 0xFF, 0);
 
     RECT rcDirty = { pt.x, pt.y, pt.x+1, pt.y+1 };
     InvalidateRect(hwnd, &rcDirty, FALSE);
