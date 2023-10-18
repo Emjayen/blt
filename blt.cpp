@@ -41,7 +41,7 @@ void ResizeBackBuffer(LONG cx, WORD cy)
 
 void Present(HDC hdc, RECT* rcDst)
 {
-    BitBlt(hdc, rcDst->left, rcDst->top, rcDst->right - rcDst->left, rcDst->bottom - rcDst->top, hdcBackBuffer, 0, 0, SRCCOPY);
+    BitBlt(hdc, rcDst->left, rcDst->top, rcDst->right - rcDst->left, rcDst->bottom - rcDst->top, hdcBackBuffer, rcDst->left, rcDst->right, SRCCOPY);
 }
 
 
@@ -57,7 +57,7 @@ void Render(HWND hwnd)
 
     pPixels[pt.y*BackBufferPitch+pt.x] = RGB(0, 0xFF, 0);
 
-    RECT rcDirty = { pt.x, pt.y, 1, 1 };
+    RECT rcDirty = { pt.x, pt.y, pt.x+1, pt.y+1 };
     InvalidateRect(hwnd, &rcDirty, FALSE);
 }
 
